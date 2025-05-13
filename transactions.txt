@@ -1,81 +1,81 @@
 Date        Description                          Amount      Type      Balance
 01/10/2025  Opening Balance                       +250.00     Credit    250.00
 01/11/2025  Starbucks Coffee                      -5.65       Debit     244.35
-01/11/2025  Venmo: Lunch Split w/ Jake            -7.00       Debit     237.35
-01/12/2025  Allowance from Mom                    +20.00      Credit    257.35
-01/13/2025  Spotify Student Subscription          -4.99       Debit     252.36
-01/14/2025  7-Eleven Purchase                     -3.21       Debit     249.15
+01/11/2025  Venmo                                 -7.00       Debit     237.35
+01/12/2025  Allowance                             +20.00      Credit    257.35
+01/13/2025  Spotify                               -4.99       Debit     252.36
+01/14/2025  7-Eleven                              -3.21       Debit     249.15
 01/15/2025  Chick-fil-A Lunch                     -8.50       Debit     240.65
-01/17/2025  Part-time Paycheck                    +75.00      Credit    315.65
-01/18/2025  Amazon: Notebook & Pens               -12.47      Debit     303.18
-01/19/2025  Apple App Store: Game                 -1.99       Debit     301.19
-01/20/2025  School Cafeteria                      -4.00       Debit     297.19
-01/21/2025  CVS Pharmacy                          -6.32       Debit     290.87
-01/22/2025  Venmo: Received from Sarah            +6.00       Credit    296.87
+01/17/2025  Paycheck                              +75.00      Credit    315.65
+01/18/2025  Amazon                                -12.47      Debit     303.18
+01/19/2025  App Store                             -1.99       Debit     301.19
+01/20/2025  School                                -4.00       Debit     297.19
+01/21/2025  CVS                                   -6.32       Debit     290.87
+01/22/2025  Venmo                                 +6.00       Credit    296.87
 01/23/2025  McDonald's                            -7.75       Debit     289.12
-01/24/2025  Target: School Supplies               -14.88      Debit     274.24
-01/25/2025  Part-time Paycheck                    +80.00      Credit    354.24
-01/26/2025  Netflix (Family Plan Share)           -3.50       Debit     350.74
+01/24/2025  Target                                -14.88      Debit     274.24
+01/25/2025  Paycheck                              +80.00      Credit    354.24
+01/26/2025  Netflix                               -3.50       Debit     350.74
 01/27/2025  Starbucks                             -6.45       Debit     344.29
-01/28/2025  Venmo to Emily                        -10.00      Debit     334.29
-01/29/2025  Subway Sandwich                       -9.20       Debit     325.09
-01/30/2025  Birthday Gift from Uncle              +50.00      Credit    375.09
-02/01/2025  7-Eleven Snack Run                    -5.05       Debit     370.04
-02/02/2025  School Locker Fee                     -10.00      Debit     360.04
-02/03/2025  Google Drive Storage                  -1.99       Debit     358.05
+01/28/2025  Venmo                                 -10.00      Debit     334.29
+01/29/2025  Subway                                -9.20       Debit     325.09
+01/30/2025  Amazon                                +50.00      Credit    375.09
+02/01/2025  7-Eleven                              -5.05       Debit     370.04
+02/02/2025  School                                -10.00      Debit     360.04
+02/03/2025  Google                                -1.99       Debit     358.05
 02/04/2025  Chick-fil-A                           -9.00       Debit     349.05
-02/05/2025  Part-time Paycheck                    +85.00      Credit    434.05
-02/06/2025  Target: Valentine's Candy             -6.78       Debit     427.27
+02/05/2025  Paycheck                              +85.00      Credit    434.05
+02/06/2025  Target                                -6.78       Debit     427.27
 02/07/2025  Starbucks                             -4.65       Debit     422.62
-02/08/2025  Venmo from James                      +8.00       Credit    430.62
-02/09/2025  Apple Music Subscription              -5.00       Debit     425.62
+02/08/2025  Venmo                                 +8.00       Credit    430.62
+02/09/2025  Apple                                 -5.00       Debit     425.62
 02/10/2025  Taco Bell                             -7.25       Debit     418.37
-02/11/2025  CVS: Shampoo                          -4.89       Debit     413.48
+02/11/2025  CVS                                   -4.89       Debit     413.48
 02/12/2025  Allowance                             +25.00      Credit    438.48
-02/13/2025  Lunch with Friends                    -11.10      Debit     427.38
-02/14/2025  Movie Theater                         -13.00      Debit     414.38
+02/13/2025  Taco Bell                             -11.10      Debit     427.38
+02/14/2025  AMC                                   -13.00      Debit     414.38
 02/15/2025  Paycheck                              +85.00      Credit    499.38
-02/16/2025  Walmart: T-Shirts                     -17.60      Debit     481.78
-02/17/2025  iTunes: App Purchase                  -2.99       Debit     478.79
-02/18/2025  School Supplies                       -6.55       Debit     472.24
+02/16/2025  Walmart                               -17.60      Debit     481.78
+02/17/2025  Apple                                 -2.99       Debit     478.79
+02/18/2025  School                                -6.55       Debit     472.24
 02/19/2025  Starbucks                             -5.90       Debit     466.34
-02/20/2025  Venmo to Jason                        -10.00      Debit     456.34
+02/20/2025  Venmo                                 -10.00      Debit     456.34
 02/21/2025  Chick-fil-A                           -8.10       Debit     448.24
-02/22/2025  Part-time Paycheck                    +90.00      Credit    538.24
+02/22/2025  Paycheck                              +90.00      Credit    538.24
 02/23/2025  Dollar Tree                           -4.10       Debit     534.14
 02/24/2025  Netflix                               -3.50       Debit     530.64
-02/25/2025  Venmo from Emma                       +7.00       Credit    537.64
+02/25/2025  Venmo                                 +7.00       Credit    537.64
 02/26/2025  Taco Bell                             -6.80       Debit     530.84
-02/27/2025  Apple App Store: Notes App            -1.49       Debit     529.35
-02/28/2025  7-Eleven Candy                        -2.25       Debit     527.10
+02/27/2025  App Store                             -1.49       Debit     529.35
+02/28/2025  7-Eleven                              -2.25       Debit     527.10
 03/01/2025  Allowance                             +25.00      Credit    552.10
 03/02/2025  McDonald's                            -7.45       Debit     544.65
 03/03/2025  Spotify                               -4.99       Debit     539.66
-03/04/2025  Lunch: Panda Express                  -9.50       Debit     530.16
+03/04/2025  Panda Express                         -9.50       Debit     530.16
 03/05/2025  Part-time Paycheck                    +95.00      Credit    625.16
-03/06/2025  Venmo to Rachel                       -5.00       Debit     620.16
-03/07/2025  School Dance Ticket                   -12.00      Debit     608.16
-03/08/2025  CVS: Cough Drops                      -3.20       Debit     604.96
+03/06/2025  Venmo                                 -5.00       Debit     620.16
+03/07/2025  School                                -12.00      Debit     608.16
+03/08/2025  CVS                                   -3.20       Debit     604.96
 03/09/2025  Taco Bell                             -7.90       Debit     597.06
 03/10/2025  Starbucks                             -5.25       Debit     591.81
-03/11/2025  Gift from Grandma                     +30.00      Credit    621.81
-03/12/2025  Amazon: School Book                   -18.99      Debit     602.82
-03/13/2025  Apple iCloud Storage                  -0.99       Debit     601.83
-03/14/2025  Target: Birthday Gift for Friend      -15.00      Debit     586.83
-03/15/2025  Part-time Paycheck                    +90.00      Credit    676.83
+03/11/2025  Amazon                                +30.00      Credit    621.81
+03/12/2025  Amazon                                -18.99      Debit     602.82
+03/13/2025  Apple                                 -0.99       Debit     601.83
+03/14/2025  Target                                -15.00      Debit     586.83
+03/15/2025  Paycheck                              +90.00      Credit    676.83
 03/16/2025  Taco Bell                             -8.60       Debit     668.23
 03/17/2025  Starbucks                             -6.25       Debit     661.98
-03/18/2025  School Cafeteria                      -4.50       Debit     657.48
-03/19/2025  CVS: Toothpaste                       -3.89       Debit     653.59
-03/20/2025  Lunch with Friends                    -10.35      Debit     643.24
-03/21/2025  Venmo to Lily                         -8.00       Debit     635.24
-03/22/2025  Part-time Paycheck                    +100.00     Credit    735.24
+03/18/2025  School                                -4.50       Debit     657.48
+03/19/2025  CVS                                   -3.89       Debit     653.59
+03/20/2025  Panda Express                         -10.35      Debit     643.24
+03/21/2025  Venmo                                 -8.00       Debit     635.24
+03/22/2025  Paycheck                              +100.00     Credit    735.24
 03/23/2025  Spotify                               -4.99       Debit     730.25
 03/24/2025  McDonald's                            -8.40       Debit     721.85
 03/25/2025  Allowance                             +25.00      Credit    746.85
 03/26/2025  Starbucks                             -6.10       Debit     740.75
-03/27/2025  Lunch: Chipotle                       -9.25       Debit     731.50
+03/27/2025  Chipotle                              -9.25       Debit     731.50
 03/28/2025  Netflix                               -3.50       Debit     728.00
-03/29/2025  CVS: School Project Materials         -10.75      Debit     717.25
-03/30/2025  Amazon: Graphing Calculator           -49.99      Debit     667.26
+03/29/2025  CVS                                   -10.75      Debit     717.25
+03/30/2025  Amazon                                -49.99      Debit     667.26
 03/31/2025  Paycheck                              +95.00      Credit    762.26
