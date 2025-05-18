@@ -1,45 +1,59 @@
 package com.CSA.BankingBeyond;
 
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import java.io.InputStreamReader;
+import java.util.*;
 
 @RestController
 public class TransactionParser {
-    public static void main(String[] args) {
-        TransactionParser parser = new TransactionParser();
-        List<Transaction> transactions = parser.parseTransactions();
-        System.out.println(transactions);
+    private List<Transaction> allTransactions;
+    private TransactionMap transactionMap;
+
+    public TransactionParser() {
+        this.allTransactions = parseTransactions();
+        this.transactionMap = new TransactionMap(allTransactions);
     }
+
     @GetMapping("/bank")
+    public List<Transaction> getAllTransactions() {
+        return allTransactions;
+    }
+
+    @GetMapping("/search")
+    public List<Transaction> searchTransactions(@RequestParam(required = false) String keyword) {
+        if (keyword == null || keyword.trim().isEmpty()) {
+            return allTransactions;  // Return all if search is empty
+        }
+        return transactionMap.search(keyword.trim());
+    }
+
+    // This method reads transactions.txt file and returns list of Transactions
     public List<Transaction> parseTransactions() {
+        List<Transaction> transactions = new ArrayList<>();
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("transactions.txt");
 
         if (inputStream == null) {
-            System.out.println("File not found in resources folder.");
-            return new ArrayList<>();
+            System.out.println("File not found!");
+            return transactions;
         }
 
-        List<Transaction> transactions = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
-            String line;
-            reader.readLine();
-
+            String line = reader.readLine(); // Skip header
             while ((line = reader.readLine()) != null) {
-                String[] parts = line.split("\\s{2,}");
-                if (parts.length == 4) {
+                String[] parts = line.trim().split("\\s{2,}");
+                if (parts.length >= 5) {
                     String date = parts[0];
-                    String description = parts[1];
-                    double amount = parseAmount(parts[2]);
-                    double balance = parseBalance(parts[3]);
-
-                    transactions.add(new Transaction(date, description, amount, balance));
+                    String category = parts[1];
+                    String description = parts[2];
+                    double amount = Double.parseDouble(parts[3].replaceAll("[^\\d.-]", ""));
+                    double balance = Double.parseDouble(parts[4].replaceAll("[^\\d.-]", ""));
+                    transactions.add(new Transaction(date, category, description, amount, balance));
                 }
             }
         } catch (IOException e) {
@@ -49,13 +63,33 @@ public class TransactionParser {
         return transactions;
     }
 
-    private double parseAmount(String amountStr) {
-        amountStr = amountStr.replaceAll("[^\\d.-]", "");
-        return Double.parseDouble(amountStr);
-    }
+    // Inner class TransactionMap to keep hashmap of keywords -> transactions (student style)
+    public class TransactionMap {
+        private HashMap<String, List<Transaction>> map;
 
-    private double parseBalance(String balanceStr) {
-        balanceStr = balanceStr.replaceAll("[^\\d.-]", "");
-        return Double.parseDouble(balanceStr);
+        public TransactionMap(List<Transaction> transactions) {
+            map = new HashMap<>();
+            for (Transaction tx : transactions) {
+                addToMap(tx.getCategory(), tx);
+                addToMap(tx.getDescription(), tx);
+                addToMap(tx.getDate(), tx);
+            }
+        }
+
+        private void addToMap(String key, Transaction tx) {
+            key = key.toLowerCase();
+            if (!map.containsKey(key)) {
+                map.put(key, new ArrayList<Transaction>());
+            }
+            map.get(key).add(tx);
+        }
+
+        public List<Transaction> search(String key) {
+            key = key.toLowerCase();
+            if (map.containsKey(key)) {
+                return map.get(key);
+            }
+            return new ArrayList<>();
+        }
     }
 }

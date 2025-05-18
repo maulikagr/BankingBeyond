@@ -1,99 +1,84 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Spring Boot + Static HTML</title>
-  <style>
-    table {
-      width: 90%;
-      border-collapse: collapse;
-      margin-top: 20px;
-      font-family: Arial, sans-serif;
-    }
-
-    th, td {
-      border: 1px solid #ccc;
-      padding: 10px;
-      text-align: left;
-    }
-
-    th {
-      background-color: #f4f4f4;
-    }
-
-    h1 {
-      color: #2c3e50;
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <title>Transaction Viewer</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        #search-bar { width: 300px; padding: 8px; margin-bottom: 15px; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
 </head>
 <body>
-  <h1>Transaction History</h1>
-  <div id="transaction-table"></div>
+    <h1>Bank Transactions</h1>
+    <input type="text" id="search-bar" placeholder="Search by Category, Description, or Date" />
 
-  <script>
-    fetch('/bank')
-      .then(response => response.json())
-      .then(data => {
-        if (!Array.isArray(data) || data.length === 0) {
-          document.getElementById('transaction-table').textContent = "No transactions found.";
-          return;
+    <div id="transaction-table"></div>
+
+    <script>
+        const searchBar = document.getElementById('search-bar');
+        const tableDiv = document.getElementById('transaction-table');
+
+        function renderTable(data) {
+            if (!Array.isArray(data) || data.length === 0) {
+                tableDiv.textContent = "No transactions found.";
+                return;
+            }
+
+            const table = document.createElement('table');
+            const headers = ['Date', 'Category', 'Description', 'Amount', 'Balance'];
+
+            const thead = document.createElement('thead');
+            const headerRow = document.createElement('tr');
+            headers.forEach(headerText => {
+                const th = document.createElement('th');
+                th.textContent = headerText;
+                headerRow.appendChild(th);
+            });
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
+
+            const tbody = document.createElement('tbody');
+            data.forEach(tx => {
+                const row = document.createElement('tr');
+                ['date', 'category', 'description', 'amount', 'balance'].forEach(key => {
+                    const cell = document.createElement('td');
+                    if (key === 'amount' || key === 'balance') {
+                        cell.textContent = `$${tx[key].toFixed(2)}`;
+                    } else {
+                        cell.textContent = tx[key];
+                    }
+                    row.appendChild(cell);
+                });
+                tbody.appendChild(row);
+            });
+
+            table.appendChild(tbody);
+            tableDiv.innerHTML = '';
+            tableDiv.appendChild(table);
         }
 
-        const table = document.createElement('table');
-        const headers = ['Date', 'Description', 'Amount', 'Balance'];
+        function fetchAndRender(keyword = '') {
+            let url = '/search';
+            if (keyword.trim() !== '') {
+                url += '?keyword=' + encodeURIComponent(keyword.trim());
+            }
+            fetch(url)
+                .then(response => response.json())
+                .then(data => renderTable(data))
+                .catch(() => {
+                    tableDiv.textContent = "Failed to load transactions.";
+                });
+        }
 
-        const thead = document.createElement('thead');
-        const headerRow = document.createElement('tr');
-        headers.forEach(headerText => {
-          const th = document.createElement('th');
-          th.textContent = headerText;
-          headerRow.appendChild(th);
-        });
-        thead.appendChild(headerRow);
-        table.appendChild(thead);
-
-        const tbody = document.createElement('tbody');
-        data.forEach(tx => {
-          const row = document.createElement('tr');
-
-          const dateCell = document.createElement('td');
-          dateCell.textContent = tx.date;
-          row.appendChild(dateCell);
-
-          const descriptionCell = document.createElement('td');
-          descriptionCell.textContent = tx.description;
-          row.appendChild(descriptionCell);
-
-          const amountCell = document.createElement('td');
-          amountCell.textContent = `$${tx.amount.toFixed(2)}`;
-          row.appendChild(amountCell);
-
-          const balanceCell = document.createElement('td');
-          balanceCell.textContent = `$${tx.balance.toFixed(2)}`;
-          row.appendChild(balanceCell);
-
-          tbody.appendChild(row);
+        searchBar.addEventListener('input', (e) => {
+            fetchAndRender(e.target.value);
         });
 
-        table.appendChild(tbody);
-        document.getElementById('transaction-table').appendChild(table);
-      })
-      .catch(error => {
-        console.error('Error fetching transactions:', error);
-        document.getElementById('transaction-table').textContent = "Failed to load transactions.";
-      });
-  </script>
-
-  <p id="tell"></p>
-  <script>
-    fetch('/hello')
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById('tell').textContent = data;
-      })
-      .catch(error => {
-        console.error('Error fetching message:', error);
-        document.getElementById('tell').textContent = "Failed to load message.";
-      });
-  </script>
+        // Initial load: show all transactions
+        fetchAndRender();
+    </script>
 </body>
 </html>
