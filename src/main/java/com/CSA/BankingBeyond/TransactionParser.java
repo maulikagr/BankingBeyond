@@ -28,12 +28,12 @@ public class TransactionParser {
     @GetMapping("/search")
     public List<Transaction> searchTransactions(@RequestParam(required = false) String keyword) {
         if (keyword == null || keyword.trim().isEmpty()) {
-            return allTransactions;  // Return all if search is empty
+            return allTransactions;
         }
         return transactionMap.search(keyword.trim());
     }
 
-    // This method reads transactions.txt file and returns list of Transactions
+
     public List<Transaction> parseTransactions() {
         List<Transaction> transactions = new ArrayList<>();
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("transactions.txt");
@@ -44,7 +44,7 @@ public class TransactionParser {
         }
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
-            String line = reader.readLine(); // Skip header
+            String line = reader.readLine();
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.trim().split("\\s{2,}");
                 if (parts.length >= 5) {
@@ -61,35 +61,5 @@ public class TransactionParser {
         }
 
         return transactions;
-    }
-
-    // Inner class TransactionMap to keep hashmap of keywords -> transactions (student style)
-    public class TransactionMap {
-        private HashMap<String, List<Transaction>> map;
-
-        public TransactionMap(List<Transaction> transactions) {
-            map = new HashMap<>();
-            for (Transaction tx : transactions) {
-                addToMap(tx.getCategory(), tx);
-                addToMap(tx.getDescription(), tx);
-                addToMap(tx.getDate(), tx);
-            }
-        }
-
-        private void addToMap(String key, Transaction tx) {
-            key = key.toLowerCase();
-            if (!map.containsKey(key)) {
-                map.put(key, new ArrayList<Transaction>());
-            }
-            map.get(key).add(tx);
-        }
-
-        public List<Transaction> search(String key) {
-            key = key.toLowerCase();
-            if (map.containsKey(key)) {
-                return map.get(key);
-            }
-            return new ArrayList<>();
-        }
     }
 }
