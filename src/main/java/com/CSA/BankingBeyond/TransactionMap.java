@@ -40,29 +40,4 @@ public class TransactionMap {
         }
     }
 
-    // For testing only
-    public static void main(String[] args) {
-        TransactionParser parser = new TransactionParser();
-        List<Transaction> transactions = parser.getAllTransactions(); // Updated to use public getter
-
-        TransactionMap txMap = new TransactionMap(transactions);
-
-        System.out.println("Transactions for category 'Food':");
-        List<Transaction> foodTx = txMap.search("Food");
-        for (Transaction tx : foodTx) {
-            System.out.println(tx);
-        }
-
-        System.out.println("\nTransactions for description 'Taco Bell':");
-        List<Transaction> tacoTx = txMap.search("Taco Bell");
-        for (Transaction tx : tacoTx) {
-            System.out.println(tx);
-        }
-
-        System.out.println("\nTransactions on '01/10/2025':");
-        List<Transaction> dateTx = txMap.search("01/10/2025");
-        for (Transaction tx : dateTx) {
-            System.out.println(tx);
-        }
-    }
 }
