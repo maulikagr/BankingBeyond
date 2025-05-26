@@ -1,4 +1,4 @@
-package com.CSA.BankingBeyond;
+package com.CSA.BankingBeyond; 
 
 public class Transaction {
     private String date;
@@ -7,12 +7,14 @@ public class Transaction {
     private double balance;
     private String category;
 
-    public Transaction(String date, String category, String description, double amount, double balance) {
+    public Transaction(String date, String category, String description, double amount, double previousBalance) {
         this.date = date;
         this.description = description;
         this.amount = amount;
-        this.balance = balance;
         this.category = category;
+
+  
+        this.balance = previousBalance + amount;
     }
 
     public String getDate() {

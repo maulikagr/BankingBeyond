@@ -24,7 +24,7 @@ public class LoginController {
         if (user != null && user.getPassword().equals(password)) {
             // Authentication success
             model.addAttribute("username", username);
-            return "redirect:/home"; // Redirect to home page after successful login
+            return "redirect:/index.html"; // Redirect to home page after successful login
         } else {
             // Authentication failed
             model.addAttribute("error", "Invalid username or password");
