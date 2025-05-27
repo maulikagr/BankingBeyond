@@ -13,7 +13,7 @@ import java.util.*;
 @RestController
 public class TransactionParser {
     private List<Transaction> allTransactions;
-    private TransactionMap transactionMap;
+    public TransactionMap transactionMap;
 
     public TransactionParser() {
         this.allTransactions = parseTransactions();

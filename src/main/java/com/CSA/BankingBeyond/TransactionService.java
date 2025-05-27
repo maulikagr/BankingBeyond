@@ -1,30 +1,33 @@
 package com.CSA.BankingBeyond;
 
-import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.stereotype.Service;
 
 @Service
 public class TransactionService {
+    private final TransactionMap transactionMap;
+    private double currentBalance = 0.0;
 
-    private List<Transaction> transactions = new ArrayList<>();
-    private double currentBalance = 0.0; // Track current balance
-
-    public List<Transaction> getAllTransactions() {
-        return transactions;
+    public TransactionService(TransactionMap transactionMap) {
+        this.transactionMap = transactionMap;
     }
 
     public void addTransaction(Transaction transaction) {
-        // Calculate balance for the new transaction based on current balance
-        transaction = new Transaction(transaction.getDate(), transaction.getCategory(),
-                transaction.getDescription(), transaction.getAmount(), currentBalance);
+        if (transaction == null) return;
 
-        transactions.add(transaction);
-        currentBalance = transaction.getBalance(); // Update current balance after adding transaction
+        double newBalance = currentBalance + transaction.getAmount();
+        Transaction updatedTransaction = new Transaction(
+                transaction.getDate(),
+                transaction.getCategory(),
+                transaction.getDescription(),
+                transaction.getAmount(),
+                newBalance);
+        currentBalance = newBalance;
 
-        // Optionally, you can update your transaction map or storage mechanism here
+        transactionMap.addToMap(updatedTransaction.getCategory(), updatedTransaction);
+        transactionMap.addToMap(updatedTransaction.getDescription(), updatedTransaction);
+        transactionMap.addToMap(updatedTransaction.getDate(), updatedTransaction);
     }
-
-    // Add more methods as needed, such as searchTransactions, deleteTransaction, etc.
+    
 }

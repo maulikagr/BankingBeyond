@@ -15,7 +15,7 @@ public class TransactionController {
     @GetMapping("/make-transaction")
     public String transactionForm(Model model) {
         model.addAttribute("transaction", new Transaction("", "", "", 0.0, 0.0)); // Initialize a new transaction object
-        return "make-transaction"; // Return make-transaction.html (create this file in resources/templates)
+        return "redirect:/make-transaction.html"; // Return make-transaction.html (create this file in resources/templates)
     }
 
     @PostMapping("/make-transaction")

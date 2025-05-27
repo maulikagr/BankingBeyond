@@ -34,7 +34,25 @@ public class Transaction {
     public double getBalance() {
         return balance;
     }
+    public Transaction() {
+    // no-args constructor required for Spring form binding
+    }
 
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
     @Override
     public String toString() {
         return "Transaction{" +

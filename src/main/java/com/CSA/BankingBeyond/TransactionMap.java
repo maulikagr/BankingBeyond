@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class TransactionMap {
     private HashMap<String, List<Transaction>> map;
 
@@ -19,7 +22,7 @@ public class TransactionMap {
         }
     }
 
-    private void addToMap(String key, Transaction tx) {
+    public void addToMap(String key, Transaction tx) {
         if (key == null || tx == null) return;
 
         String lowerKey = key.toLowerCase();
