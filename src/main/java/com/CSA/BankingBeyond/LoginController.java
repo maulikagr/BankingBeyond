@@ -15,20 +15,18 @@ public class LoginController {
 
     @GetMapping("/login")
     public String loginForm() {
-        return "login"; // Return login.html (assuming you have a login.html in resources/templates)
+        return "login";
     }
 
     @PostMapping("/login")
     public String loginSubmit(@RequestParam String username, @RequestParam String password, Model model) {
         User user = userService.findByUsername(username);
         if (user != null && user.getPassword().equals(password)) {
-            // Authentication success
             model.addAttribute("username", username);
-            return "redirect:/index.html"; // Redirect to home page after successful login
+            return "redirect:/index.html";
         } else {
-            // Authentication failed
             model.addAttribute("error", "Invalid username or password");
-            return "login"; // Return to login page with error message
+            return "redirect:/login.html";
         }
     }
 }
