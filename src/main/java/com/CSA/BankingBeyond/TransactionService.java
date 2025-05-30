@@ -3,6 +3,8 @@ package com.CSA.BankingBeyond;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TransactionService {
     private final TransactionMap transactionMap;
@@ -23,5 +25,13 @@ public class TransactionService {
         transactionMap.addToMap(transaction.getCategory(), transaction);
         transactionMap.addToMap(transaction.getDescription(), transaction);
         transactionMap.addToMap(transaction.getDate(), transaction);
+    }
+
+    public List<Transaction> getAllTransactions() {
+        return transactionMap.getAllTransactions();
+    }
+
+    public List<Transaction> searchTransactions(String keyword) {
+        return transactionMap.search(keyword);
     }
 }

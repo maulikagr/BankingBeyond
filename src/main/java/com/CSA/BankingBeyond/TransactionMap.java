@@ -2,7 +2,9 @@ package com.CSA.BankingBeyond;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.stereotype.Component;
 
@@ -41,5 +43,13 @@ public class TransactionMap {
         } else {
             return new ArrayList<Transaction>();
         }
+    }
+
+    public List<Transaction> getAllTransactions() {
+        Set<Transaction> uniqueTransactions = new HashSet<>();
+        for (List<Transaction> transactions : map.values()) {
+            uniqueTransactions.addAll(transactions);
+        }
+        return new ArrayList<>(uniqueTransactions);
     }
 }
