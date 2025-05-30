@@ -5,6 +5,12 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.Map;
 
+/*
+ * This is the service class for the user.
+ * It is used to find a user by username.
+ * It is also used to save a user.
+ */
+
 @Service
 public class UserServiceImpl implements UserService {
 

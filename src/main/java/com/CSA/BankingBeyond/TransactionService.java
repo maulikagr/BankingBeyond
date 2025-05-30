@@ -6,6 +6,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+/*
+ * This is the service class for the transaction service.
+ * It is used to add a transaction.
+ * It is also used to get the all transactions.
+ * It is also used to search for a transaction.
+ */
+
 @Service
 public class TransactionService {
     private final TransactionParser transactionParser;

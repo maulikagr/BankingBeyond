@@ -1,5 +1,11 @@
 package com.CSA.BankingBeyond; 
 
+/*
+ * This is the class for the transaction.
+ * It is used to create a transaction object.
+ * It is also used to get the date, description, category, amount, and balance of the transaction.
+ */
+
 public class Transaction {
     private String date;
     private String description;

@@ -7,6 +7,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+/*
+ * This is the controller class for the spending limit service.
+ * It is used to set the spending limit for the user.
+ * It is also used to get the spending limit form.
+ * It is also used to set the spending limit.
+ */
+
 @Controller
 public class SpendingLimitController {
 

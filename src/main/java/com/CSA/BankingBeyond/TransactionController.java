@@ -7,6 +7,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/*
+ * This is the controller class for the transaction service.
+ * It is used to make a transaction.
+ * It is also used to get the transaction form.
+ * It is also used to get the transaction.
+ */
+
 @Controller
 public class TransactionController {
 

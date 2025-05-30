@@ -1,5 +1,11 @@
 package com.CSA.BankingBeyond;
 
+/*
+ * This is the class for the user.
+ * It is used to create a user object.
+ * It is also used to get the username and password of the user.
+ */
+
 public class User {
     private String username;
     private String password;

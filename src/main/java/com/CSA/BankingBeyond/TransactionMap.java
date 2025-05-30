@@ -8,6 +8,13 @@ import java.util.Set;
 
 import org.springframework.stereotype.Component;
 
+/*
+ * This is the class for the transaction map.
+ * It is used to create a transaction map.
+ * It is also used to get the transaction map.
+ * It is also used to get the transaction.
+ */
+
 @Component
 public class TransactionMap {
     private HashMap<String, List<Transaction>> map;

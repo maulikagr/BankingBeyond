@@ -7,6 +7,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+/*
+ * This is the controller class for the login service.
+ * It is used to login the user.
+ * It is also used to create an account.
+ * It is also used to get the login page.
+ * It is also used to get the create account page.
+ */
+
 @Controller
 public class LoginController {
 

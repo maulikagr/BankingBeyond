@@ -7,6 +7,14 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.*;
 
+/*
+ * This is the service class for the transaction parser.
+ * It is used to parse the transactions.
+ * It is also used to get the all transactions.
+ * It is also used to get the transaction map.
+ * It is also used to get the transaction.
+ */
+
 @Service
 public class TransactionParser {
     private List<Transaction> allTransactions;

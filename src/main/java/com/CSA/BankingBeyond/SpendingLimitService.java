@@ -8,6 +8,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+/*
+ * This is the service class for the spending limit service.
+ * It is used to check the daily spending limit.
+ * It is also used to send an email to the user if the spending limit is exceeded.
+ */
+
 @Service
 public class SpendingLimitService {
 
