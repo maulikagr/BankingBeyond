@@ -3,10 +3,7 @@ package com.CSA.BankingBeyond;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -14,28 +11,38 @@ import java.util.List;
 public class TransactionController {
 
     @Autowired
-    private TransactionService transactionService; // Inject your transaction service
+    private TransactionService transactionService;
+
+    @Autowired
+    private TransactionParser transactionParser;
+
+    @Autowired
+    private SpendingLimitService spendingLimitService;
 
     @GetMapping("/make-transaction")
     public String transactionForm(Model model) {
-        model.addAttribute("transaction", new Transaction("", "", "", 0.0, 0.0)); // Initialize a new transaction object
-        return "redirect:/make-transaction.html"; // Return make-transaction.html (create this file in resources/templates)
+        return "make-transaction";
     }
 
     @PostMapping("/make-transaction")
-    public String makeTransactionSubmit(Transaction transaction, Model model) {
-        // Process the transaction (save to database, update service, etc.)
-        transactionService.addTransaction(transaction);
-        
-        model.addAttribute("message", "Transaction successful!");
-        model.addAttribute("transaction", new Transaction("", "", "", 0.0, 0.0)); // Clear the form fields
-        
-        return "redirect:/transaction"; // Redirect to the transaction page endpoint
+    public String makeTransactionSubmit(@RequestParam String description, 
+                                      @RequestParam double amount,
+                                      @RequestParam String category,
+                                      Model model) {
+        try {
+            transactionService.addTransaction(description, amount, category);
+            // Check spending limit after adding transaction
+            spendingLimitService.checkDailySpending();
+            return "redirect:/transaction";
+        } catch (Exception e) {
+            model.addAttribute("error", "Error creating transaction: " + e.getMessage());
+            return "make-transaction";
+        }
     }
 
     @GetMapping("/transaction")
     public String showTransactions(Model model) {
-        List<Transaction> transactions = transactionService.getAllTransactions();
+        List<Transaction> transactions = transactionParser.getAllTransactions();
         model.addAttribute("transactions", transactions);
         return "transaction";
     }
@@ -43,9 +50,15 @@ public class TransactionController {
     @GetMapping("/search")
     @ResponseBody
     public List<Transaction> searchTransactions(@RequestParam(required = false) String keyword) {
-        if (keyword == null || keyword.trim().isEmpty()) {
-            return transactionService.getAllTransactions();
-        }
-        return transactionService.searchTransactions(keyword.trim());
+        return transactionParser.searchTransactions(keyword);
+    }
+
+    @GetMapping("/")
+    public String home(Model model) {
+        List<Transaction> transactions = transactionParser.getAllTransactions();
+        double currentBalance = transactions.isEmpty() ? 0.0 : 
+            transactions.get(transactions.size() - 1).getBalance();
+        model.addAttribute("currentBalance", currentBalance);
+        return "index";
     }
 }

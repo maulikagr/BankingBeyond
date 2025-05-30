@@ -4,43 +4,192 @@
     <meta charset="UTF-8" />
     <title>Transaction Viewer</title>
     <style>
-        body { font-family: Arial, sans-serif; padding: 20px; }
-        #search-bar { width: 300px; padding: 8px; margin-bottom: 15px; }
-        table { border-collapse: collapse; width: 100%; }
-        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
-        th { background-color: #f2f2f2; }
+        :root {
+            --primary-green: #2E7D32;
+            --light-green: #4CAF50;
+            --hover-green: #1B5E20;
+            --white: #FFFFFF;
+            --light-gray: #F5F5F5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-gray);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background-color: var(--primary-green);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background-color: var(--hover-green);
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .search-container {
+            background-color: var(--white);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        #search-bar {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid var(--light-gray);
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        #search-bar:focus {
+            outline: none;
+            border-color: var(--light-green);
+        }
+
+        .transaction-table {
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background-color: var(--primary-green);
+            color: var(--white);
+            padding: 1rem;
+            text-align: left;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover {
+            background-color: var(--light-gray);
+        }
+
+        .amount-positive {
+            color: var(--primary-green);
+        }
+
+        .amount-negative {
+            color: #D32F2F;
+        }
+
+        footer {
+            background-color: var(--primary-green);
+            color: var(--white);
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
     </style>
 </head>
 <body>
-    <h1>Bank Transactions</h1>
-    <input type="text" id="search-bar" placeholder="Search by Category, Description, or Date" />
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="/" class="logo">BankingBeyond</a>
+            <div class="nav-links">
+                <a href="/transaction">View Transactions</a>
+                <a href="/make-transaction">Make Transaction</a>
+            </div>
+        </div>
+    </nav>
 
-    <div id="transaction-table">
-        <table>
-            <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Category</th>
-                    <th>Description</th>
-                    <th>Amount</th>
-                    <th>Balance</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="transaction : ${transactions}">
-                    <td th:text="${transaction.date}"></td>
-                    <td th:text="${transaction.category}"></td>
-                    <td th:text="${transaction.description}"></td>
-                    <td th:text="${'$' + #numbers.formatDecimal(transaction.amount, 1, 2)}"></td>
-                    <td th:text="${'$' + #numbers.formatDecimal(transaction.balance, 1, 2)}"></td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="main-content">
+        <div class="search-container">
+            <input type="text" id="search-bar" placeholder="Search by Category, Description, or Date" />
+        </div>
+
+        <div class="transaction-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                        <th>Balance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="transaction : ${transactions}">
+                        <td th:text="${transaction.date}"></td>
+                        <td th:text="${transaction.category}"></td>
+                        <td th:text="${transaction.description}"></td>
+                        <td th:class="${transaction.amount >= 0 ? 'amount-positive' : 'amount-negative'}"
+                            th:text="${'$' + #numbers.formatDecimal(transaction.amount, 1, 2)}"></td>
+                        <td th:text="${'$' + #numbers.formatDecimal(transaction.balance, 1, 2)}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
+
+    <footer>
+        &copy; 2025 BankingBeyond. All rights reserved.
+    </footer>
 
     <script th:inline="javascript">
         const searchBar = document.getElementById('search-bar');
-        const tableDiv = document.getElementById('transaction-table');
+        const tableDiv = document.querySelector('.transaction-table');
 
         function fetchAndRender(keyword = '') {
             let url = '/search';
@@ -54,7 +203,7 @@
                     tbody.innerHTML = '';
                     
                     if (!Array.isArray(data) || data.length === 0) {
-                        tbody.innerHTML = '<tr><td colspan="5">No transactions found.</td></tr>';
+                        tbody.innerHTML = '<tr><td colspan="5" style="text-align: center;">No transactions found.</td></tr>';
                         return;
                     }
 
@@ -64,7 +213,7 @@
                             <td>${tx.date}</td>
                             <td>${tx.category}</td>
                             <td>${tx.description}</td>
-                            <td>$${tx.amount.toFixed(2)}</td>
+                            <td class="${tx.amount >= 0 ? 'amount-positive' : 'amount-negative'}">$${tx.amount.toFixed(2)}</td>
                             <td>$${tx.balance.toFixed(2)}</td>
                         `;
                         tbody.appendChild(row);
@@ -72,7 +221,7 @@
                 })
                 .catch(() => {
                     tableDiv.querySelector('tbody').innerHTML = 
-                        '<tr><td colspan="5">Failed to load transactions.</td></tr>';
+                        '<tr><td colspan="5" style="text-align: center;">Failed to load transactions.</td></tr>';
                 });
         }
 

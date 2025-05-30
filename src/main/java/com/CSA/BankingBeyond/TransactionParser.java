@@ -1,38 +1,46 @@
 package com.CSA.BankingBeyond;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.stereotype.Service;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.*;
 
-@RestController
+@Service
 public class TransactionParser {
     private List<Transaction> allTransactions;
-    public TransactionMap transactionMap;
+    private TransactionMap transactionMap;
 
     public TransactionParser() {
-        this.allTransactions = parseTransactions();
+        this.allTransactions = new ArrayList<>();
         this.transactionMap = new TransactionMap(allTransactions);
+        List<Transaction> parsedTransactions = parseTransactions();
+        this.allTransactions.addAll(parsedTransactions);
+        this.transactionMap.updateMap(allTransactions);
     }
 
-    @GetMapping("/bank")
     public List<Transaction> getAllTransactions() {
         return allTransactions;
     }
 
-    @GetMapping("/search")
-    public List<Transaction> searchTransactions(@RequestParam(required = false) String keyword) {
+    public void addTransaction(Transaction transaction) {
+        if (transaction != null) {
+            allTransactions.add(transaction);
+            transactionMap.updateMap(allTransactions);
+        }
+    }
+
+    public List<Transaction> searchTransactions(String keyword) {
         if (keyword == null || keyword.trim().isEmpty()) {
             return allTransactions;
         }
         return transactionMap.search(keyword.trim());
     }
 
+    public TransactionMap getTransactionMap() {
+        return transactionMap;
+    }
 
     public List<Transaction> parseTransactions() {
         List<Transaction> transactions = new ArrayList<>();

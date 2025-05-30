@@ -14,14 +14,7 @@ public class TransactionMap {
 
     public TransactionMap(List<Transaction> transactions) {
         map = new HashMap<>();
-
-        for (Transaction tx : transactions) {
-            if (tx == null) continue;
-
-            addToMap(tx.getCategory(), tx);
-            addToMap(tx.getDescription(), tx);
-            addToMap(tx.getDate(), tx);
-        }
+        updateMap(transactions);  // Use updateMap to initialize the map
     }
 
     public void addToMap(String key, Transaction tx) {
@@ -38,11 +31,16 @@ public class TransactionMap {
         if (key == null) return new ArrayList<Transaction>();
 
         String lowerKey = key.toLowerCase();
-        if (map.containsKey(lowerKey)) {
-            return map.get(lowerKey);
-        } else {
-            return new ArrayList<Transaction>();
+        Set<Transaction> results = new HashSet<>();
+        
+        // Search for partial matches
+        for (String mapKey : map.keySet()) {
+            if (mapKey.contains(lowerKey)) {
+                results.addAll(map.get(mapKey));
+            }
         }
+        
+        return new ArrayList<>(results);
     }
 
     public List<Transaction> getAllTransactions() {
@@ -51,5 +49,19 @@ public class TransactionMap {
             uniqueTransactions.addAll(transactions);
         }
         return new ArrayList<>(uniqueTransactions);
+    }
+
+    public void updateMap(List<Transaction> transactions) {
+        // Clear existing map
+        map.clear();
+        
+        // Rebuild map with all transactions
+        for (Transaction tx : transactions) {
+            if (tx == null) continue;
+            
+            addToMap(tx.getCategory(), tx);
+            addToMap(tx.getDescription(), tx);
+            addToMap(tx.getDate(), tx);
+        }
     }
 }

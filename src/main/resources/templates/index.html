@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>BankingBeyond Home</title>
+    <style>
+        :root {
+            --primary-green: #2E7D32;
+            --light-green: #4CAF50;
+            --hover-green: #1B5E20;
+            --white: #FFFFFF;
+            --light-gray: #F5F5F5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-gray);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background-color: var(--primary-green);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            background-color: var(--hover-green);
+        }
+
+        .main-content {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .balance-box {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .balance-label {
+            color: #666;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .balance-amount {
+            color: var(--primary-green);
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        .welcome-section {
+            background-color: var(--white);
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .welcome-section h1 {
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .welcome-section p {
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        footer {
+            background-color: var(--primary-green);
+            color: var(--white);
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="/" class="logo">BankingBeyond</a>
+            <div class="nav-links">
+                <a href="/set-limit">Set Limit</a>
+                <a href="/transaction">View Transactions</a>
+                <a href="/make-transaction">Make Transaction</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="welcome-section">
+            <h1>Welcome to BankingBeyond</h1>
+            <p>Your trusted partner in managing your finances. Use the navigation above to view your transactions or make a new transaction.</p>
+        </div>
+
+        <div class="balance-box">
+            <div class="balance-label">Current Balance</div>
+            <div class="balance-amount" th:text="${'$' + #numbers.formatDecimal(currentBalance, 1, 2)}">$0.00</div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2025 BankingBeyond. All rights reserved.
+    </footer>
+</body>
+</html> 

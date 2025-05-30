@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Set Spending Limit - BankingBeyond</title>
+    <style>
+        :root {
+            --primary-green: #2E7D32;
+            --light-green: #4CAF50;
+            --hover-green: #1B5E20;
+            --white: #FFFFFF;
+            --light-gray: #F5F5F5;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-gray);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .navbar {
+            background-color: var(--primary-green);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        .nav-links a:hover {
+            background-color: var(--hover-green);
+        }
+        .main-content {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        .limit-container {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .limit-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .limit-header h1 {
+            color: var(--primary-green);
+            margin-bottom: 0.5rem;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #666;
+            font-weight: 500;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid var(--light-gray);
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        input[type="number"]:focus {
+            outline: none;
+            border-color: var(--light-green);
+        }
+        button {
+            width: 100%;
+            background-color: var(--primary-green);
+            color: var(--white);
+            padding: 1rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: var(--hover-green);
+        }
+        .message {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 4px;
+            text-align: center;
+        }
+        .message.success {
+            background-color: #E8F5E9;
+            color: #388E3C;
+        }
+        .current-limit {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background-color: var(--light-gray);
+            border-radius: 4px;
+        }
+        .current-limit span {
+            font-weight: bold;
+            color: var(--primary-green);
+        }
+        footer {
+            background-color: var(--primary-green);
+            color: var(--white);
+            text-align: center;
+            padding: 1rem;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="/" class="logo">BankingBeyond</a>
+            <div class="nav-links">
+                <a href="/set-limit">Set Limit</a>
+                <a href="/transaction">View Transactions</a>
+                <a href="/make-transaction">Make Transaction</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="limit-container">
+            <div class="limit-header">
+                <h1>Set Daily Spending Limit</h1>
+                <p>Set a limit to receive notifications when you exceed your daily spending</p>
+            </div>
+
+            <div class="current-limit" th:if="${currentLimit != null}">
+                Current daily limit: <span th:text="${'$' + #numbers.formatDecimal(currentLimit, 1, 2)}">$0.00</span>
+            </div>
+
+            <form action="/set-limit" method="post">
+                <div class="form-group">
+                    <label for="limit">Daily Spending Limit ($)</label>
+                    <input type="number" id="limit" name="limit" step="0.01" min="0" required 
+                           th:value="${currentLimit}" placeholder="Enter your daily spending limit">
+                </div>
+                <button type="submit">Set Limit</button>
+            </form>
+
+            <div th:if="${message}" class="message success" th:text="${message}"></div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2025 BankingBeyond. All rights reserved.
+    </footer>
+</body>
+</html> 
