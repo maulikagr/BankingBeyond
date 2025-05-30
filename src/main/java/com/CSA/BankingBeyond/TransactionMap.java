@@ -42,5 +42,4 @@ public class TransactionMap {
             return new ArrayList<Transaction>();
         }
     }
-
 }

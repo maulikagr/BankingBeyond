@@ -12,17 +12,20 @@ public class Transaction {
         this.description = description;
         this.amount = amount;
         this.category = category;
-
-  
         this.balance = previousBalance + amount;
+    }
+
+    public Transaction() {
     }
 
     public String getDate() {
         return date;
     }
+
     public String getCategory() {
         return category;
     }
+
     public String getDescription() {
         return description;
     }
@@ -34,8 +37,9 @@ public class Transaction {
     public double getBalance() {
         return balance;
     }
-    public Transaction() {
-    // no-args constructor required for Spring form binding
+
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 
     public void setDate(String date) {
@@ -53,6 +57,7 @@ public class Transaction {
     public void setAmount(double amount) {
         this.amount = amount;
     }
+
     @Override
     public String toString() {
         return "Transaction{" +
@@ -64,5 +69,6 @@ public class Transaction {
                 '}';
     }
 }
+
 
 

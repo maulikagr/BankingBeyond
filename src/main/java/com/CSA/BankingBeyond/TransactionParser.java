@@ -44,16 +44,20 @@ public class TransactionParser {
         }
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
-            String line = reader.readLine();
+            String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.trim().split("\\s{2,}");
                 if (parts.length >= 5) {
-                    String date = parts[0];
-                    String category = parts[1];
-                    String description = parts[2];
-                    double amount = Double.parseDouble(parts[3].replaceAll("[^\\d.-]", ""));
-                    double balance = Double.parseDouble(parts[4].replaceAll("[^\\d.-]", ""));
-                    transactions.add(new Transaction(date, category, description, amount, balance));
+                    try {
+                        String date = parts[0];
+                        String category = parts[1];
+                        String description = parts[2];
+                        double amount = Double.parseDouble(parts[3].replaceAll("[^\\d.-]", ""));
+                        double balance = Double.parseDouble(parts[4].replaceAll("[^\\d.-]", ""));
+                        transactions.add(new Transaction(date, category, description, amount, balance));
+                    } catch (NumberFormatException e) {
+                        System.out.println("Skipping invalid transaction: " + line);
+                    }
                 }
             }
         } catch (IOException e) {
@@ -62,4 +66,5 @@ public class TransactionParser {
 
         return transactions;
     }
+
 }
