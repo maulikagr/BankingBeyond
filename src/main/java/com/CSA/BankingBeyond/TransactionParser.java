@@ -70,7 +70,7 @@ public class TransactionParser {
                         String description = parts[2];
                         double amount = Double.parseDouble(parts[3].replaceAll("[^\\d.-]", ""));
                         double balance = Double.parseDouble(parts[4].replaceAll("[^\\d.-]", ""));
-                        transactions.add(new Transaction(date, category, description, amount, balance));
+                        transactions.add(new Transaction(date, description, category, amount, balance));
                     } catch (NumberFormatException e) {
                         System.out.println("Skipping invalid transaction: " + line);
                     }
